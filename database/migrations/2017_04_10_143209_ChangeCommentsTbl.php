@@ -15,10 +15,10 @@ class ChangeCommentsTbl extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             //
-            $table->integer('article_id')->unsigned()->default(1);
+            $table->integer('article_id')->after('parent_id')->unsigned()->default(1);
             $table->foreign('article_id')->references('id')->on('articles');
 
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->after('article_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
         });
