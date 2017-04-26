@@ -84,7 +84,7 @@
 <!-- END HEAD -->
 
 <!-- START BODY -->
-<body class="no_js responsive page-template-home-php stretched">
+<body class="no_js responsive {{ Route::currentRouteName() == 'home' ? 'page-template-home-php' : '' }} stretched">
 
 <!-- START BG SHADOW -->
 <div class="bg-shadow">
@@ -114,13 +114,11 @@
                 <hr />
 
                 <!-- START MAIN NAVIGATION -->
-                @yield('navigation')
+                    @yield('navigation')
                 <!-- END MAIN NAVIGATION -->
-
                 <div id="header-shadow"></div>
                 <div id="menu-shadow"></div>
             </div>
-
         </div>
         <!-- END HEADER -->
 

@@ -5,5 +5,6 @@ return [
     'comments' => 'комментарий|комментария|комментариев',
     'read_more' => ' Подробнее',
     'articles_no' => 'Записей нет',
-    'latest_project' => 'Последние работы'
+    'latest_project' => 'Последние работы',
+    'latest_comments'=> 'Последние ответы',
 ];
