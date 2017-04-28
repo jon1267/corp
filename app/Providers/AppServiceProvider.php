@@ -2,7 +2,7 @@
 
 namespace Corp\Providers;
 
-//use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 
@@ -17,10 +17,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         // @set($i,10) я обошелся без этого, но буду иметь ввиду:)
-/*        Blade::directive('set', function ($exp) {
+        Blade::directive('set', function ($exp) {
             list($name, $val) = explode(',',$exp);
             return "<?php $name = $val ?>";
-        });*/
+        });
 
         DB::listen(function ($query) {
             //echo '<h2>'.$query->sql.'</h2>';
