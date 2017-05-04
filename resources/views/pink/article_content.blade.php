@@ -73,7 +73,7 @@
         <!-- END TRACKBACK & PINGBACK -->
         <div id="respond">
             <h3 id="reply-title">Leave a <span>Reply</span> <small><a rel="nofollow" id="cancel-comment-reply-link" href="#respond" style="display:none;">Cancel reply</a></small></h3>
-            <form action="sendmail.PHP" method="post" id="commentform">
+            <form action="{{ route('comment.store') }}" method="post" id="commentform">
 
                 @if(!Auth::check())
                     <p class="comment-form-author"><label for="author">Name</label> <input id="author" name="author" type="text" value="" size="30" aria-required="true" /></p>
@@ -83,6 +83,7 @@
                 <p class="comment-form-comment"><label for="comment">Your comment</label><textarea id="comment" name="comment" cols="45" rows="8"></textarea></p>
                 <div class="clear"></div>
                 <p class="form-submit">
+                    {{ csrf_field() }}
                     <input type="hidden" id="comment_post_ID" name="comment_post_ID" value="{{$article->id}}">
                     <input type="hidden" id="comment_parent" name="comment_parent" value="">
                     <input name="submit" type="submit" id="submit" value="Post Comment" />

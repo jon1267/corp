@@ -7,6 +7,24 @@ jQuery(document).ready(function ($) {
         // код ниже предотвращает дефолтовое поведение кнопы сабмит(а это отпр.формы и перерисовка стр)
         e.preventDefault();
         var comParent = $(this);
+        $('.wrap_result').
+            css('color', 'green').
+            text('Сохраниение комментария').
+            fadeIn(500, function () {
+                var data = $('#commentform').serializeArray();
+                $.ajax({
+                    url: $('#commentform').attr('action'),
+                    data: data,
+                    type: 'POST',
+                    datatype: 'JSON',
+                    success: function(html) {
+
+                    },
+                    error: function () {
+
+                    }
+                });
+        });
     });
 
 });
