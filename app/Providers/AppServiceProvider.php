@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        // @set($i,10) я обошелся без этого, но буду иметь ввиду:)
+        // @set($i,10) я обошелся без этого, но буду иметь ввиду:) (а в уроках 18,19 уже не обошелся:(
         Blade::directive('set', function ($exp) {
             list($name, $val) = explode(',',$exp);
             return "<?php $name = $val ?>";
