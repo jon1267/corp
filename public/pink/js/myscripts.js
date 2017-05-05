@@ -4,7 +4,8 @@ jQuery(document).ready(function ($) {
     });
 
     $('#commentform').on('click','#submit', function (e) {
-        // код ниже предотвращает дефолтовое поведение кнопы сабмит(а это отпр.формы и перерисовка стр)
+        // строка ниже предотвращает (отменяет) дефолтовое поведение кнопы сабмит -
+        // отправка формы и перерисовка стр. Это и есть начало ajax adding of comments
         e.preventDefault();
         var comParent = $(this);
         $('.wrap_result').
@@ -15,6 +16,8 @@ jQuery(document).ready(function ($) {
                 $.ajax({
                     url: $('#commentform').attr('action'),
                     data: data,
+                    // строка headers: из доки по Ларавелу
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     type: 'POST',
                     datatype: 'JSON',
                     success: function(html) {
