@@ -71,7 +71,19 @@ class CommentController extends SiteController
 
         $post->comments()->save($comment);
 
-        echo json_encode(['hello'=> 'Hello world']);
+        $comment->load('user');
+        $data['id'] = $data['email'];
+
+        $data['email'] = (!empty($data['email'])) ? $data['email'] : $comment->user()->email;
+        $data['name'] = (!empty($data['name'])) ? $data['name'] : $comment->user()->name;
+
+        $data['hash'] = md5($data['email']);
+        $data['created_at'] = $comment->created_at; // доб. я дату токо вставл. коммента.
+
+        $view_comment = view(env('THEME').'.content_one_comment')->with('data', $data)->render();
+        return Response::json(['success' => true, 'comment' => $view_comment, 'data' => $data]);
+
+        // echo json_encode(['hello'=> 'Hello world']);
         exit();
     }
 
