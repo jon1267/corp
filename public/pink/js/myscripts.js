@@ -33,13 +33,15 @@ jQuery(document).ready(function ($) {
 
                                     if (html.data.parent_id > 0) {
                                         // это как-бы дочерний коммент., те ответ на уже существующий
-                                        comParent.parents('div#respond').prev()
-                                            .after('<ul class="children">' + html.comment + '</ul>');
-                                    } else {
+                                        comParent.parents('div#respond').prev().after('<ul class="children">' + html.comment + '</ul>');
+                                    }
+                                    else {
                                         // это родительский коммент. (до else - дочерний те ответ на уже существующий коммент)
                                         if ($.contains('#comments', 'ol.commentlist')) {
+
                                             $('ol.commentlist').append(html.comment);
-                                        } else {
+                                        }
+                                        else {
                                             $('#respond').before('<ol class="commentlist group">' + html.comment + '</ol>');
                                         }
                                     }
