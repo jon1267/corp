@@ -22,7 +22,8 @@ jQuery(document).ready(function ($) {
                     datatype: 'JSON',
                     success: function(html) {
                         if (html.error) {
-
+                            $('.wrap_result').css('color', 'red').append('<br><strong>Ошибка...</strong>' + html.error.join('<br>'));
+                            $('.wrap_result').delay(2000).fadeOut(500);
                         }
                         else if (html.success) {
                             $('.wrap_result')
@@ -31,8 +32,16 @@ jQuery(document).ready(function ($) {
                                 .fadeOut(500,function () {
 
                                     if (html.data.parent_id > 0) {
+                                        // это как-бы дочерний коммент., те ответ на уже существующий
                                         comParent.parents('div#respond').prev()
                                             .after('<ul class="children">' + html.comment + '</ul>');
+                                    } else {
+                                        // это родительский коммент. (до else - дочерний те ответ на уже существующий коммент)
+                                        if ($.contains('#comments', 'ol.commentlist')) {
+                                            $('ol.commentlist').append(html.comment);
+                                        } else {
+                                            $('#respond').before('<ol class="commentlist group">' + html.comment + '</ol>');
+                                        }
                                     }
 
                                     $('#cancel-comment-reply-link').click();
@@ -40,7 +49,10 @@ jQuery(document).ready(function ($) {
                         }
                     },
                     error: function () {
-
+                        $('.wrap_result').css('color', 'red').append('<br><strong>Ошибка...</strong>');
+                        $('.wrap_result').delay(3000).fadeOut(1000, function() {
+                            $('#cancel-comment-reply-link').click();
+                        });
                     }
                 });
         });
