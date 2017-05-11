@@ -26,6 +26,11 @@ class ArticlesController extends SiteController
     public function index($cat_alias = false)
     {
         //
+
+        $this->title = 'Блог';
+        $this->keywords = 'String keywords';
+        $this->meta_desc = 'String meta_desc';
+
         $articles = $this->getArticles($cat_alias);
 
         $content = view(env('THEME').'.articles_content')->with('articles', $articles)->render();
@@ -65,7 +70,7 @@ class ArticlesController extends SiteController
             $where = ['category_id',$id];
         }
 
-        $articles = $this->a_rep->get(['id', 'title', 'alias', 'created_at', 'img', 'desc', 'user_id', 'category_id'], false, true, $where);
+        $articles = $this->a_rep->get(['id', 'title', 'alias', 'created_at', 'img', 'desc', 'user_id', 'category_id', 'keywords', 'meta_desc'], false, true, $where);
 
         if ($articles) {
             //для коллекции! подгружаем инф. из связанных моделей (легкая оптимизация...)
