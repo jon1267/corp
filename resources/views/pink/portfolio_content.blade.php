@@ -33,7 +33,7 @@
 
                 @if(!$portfolios->isEmpty())
 
-                <h3>Other Projects</h3>
+                <h3>{{ Lang::get('ru.other_projects') }}</h3>
 
                 <div class="portfolio-full-description-related-projects">
 

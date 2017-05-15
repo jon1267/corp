@@ -8,4 +8,5 @@ return [
     'latest_project' => 'Последние работы',
     'latest_comments'=> 'Последние ответы',
     'reply' => 'Ответить',
+    'other_projects' => 'Другие проекты'
 ];
