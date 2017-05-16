@@ -1,7 +1,21 @@
-<!-- START CONTENT -->
+@if(count($errors))
+    <div class="box error-box">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
+
+@if(session('status'))
+    <div class="box success-box">
+        {{ session('status') }}
+    </div>
+@endif
 <div id="content-page" class="content group">
     <div class="hentry group">
-        <form id="contact-form-contact-us" class="contact-form" method="post" action="sendmail.PHP" enctype="multipart/form-data">
+        {{--<form id="contact-form-contact-us" class="contact-form" method="post" action="sendmail.PHP" enctype="multipart/form-data">--}}
+        <form id="contact-form-contact-us" class="contact-form" method="post" action="{{ route('contacts') }}" enctype="multipart/form-data">
+            {{ csrf_field() }}
             <div class="usermessagea"></div>
             <fieldset>
                 <ul>
@@ -25,7 +39,7 @@
                         <label for="message-contact-us">
                             <span class="label">Message</span>
                         </label>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span><textarea name="message" id="message-contact-us" rows="8" cols="30" class="required"></textarea></div>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span><textarea name="text" id="message-contact-us" rows="8" cols="30" class="required"></textarea></div>
                         <div class="msg-error"></div>
                     </li>
                     <li class="submit-button">
@@ -51,4 +65,3 @@
     </div>
     <!-- END COMMENTS -->
 </div>
-<!-- END CONTENT -->
