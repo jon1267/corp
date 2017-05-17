@@ -25,6 +25,10 @@ class LoginController extends Controller
      *
      * @var string
      */
+
+    // protected $loginView; добавил я...
+    protected $loginView;
+
     protected $redirectTo = '/home';
 
     /**
@@ -35,5 +39,8 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+
+        // строку ниже тоже добавил я...
+        $this->loginView = env('THEME').'.login';
     }
 }
