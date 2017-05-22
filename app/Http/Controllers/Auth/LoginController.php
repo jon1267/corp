@@ -46,7 +46,7 @@ class LoginController extends Controller
         $this->loginView = env('THEME').'.login';
     }
 
-    /*public function showLoginForm() {
+/*    public function showLoginForm() {
 
         $view = property_exists($this,'loginView') ? $this->loginView : '';
 

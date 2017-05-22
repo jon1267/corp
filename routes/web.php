@@ -46,7 +46,7 @@ Route::match(['get', 'post'], '/contacts', [
     'as'   => 'contacts'
 ]);
 
-// php artisan make:auth
+// php artisan make:auth (не работает...52 отичается от 54 !!! )
 //Route::get('login', 'Auth\LoginController@showLoginForm');
 //Route::post('login', 'Auth\LoginController@login');
 //Route::get('logout', 'Auth\LoginController@logout');
@@ -54,3 +54,20 @@ Route::match(['get', 'post'], '/contacts', [
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+/*Route::get('/admin', [
+    'uses' => 'Admin\IndexController@index',
+    'as' => 'adminIndex'
+])->middleware('auth');*/
+
+//admin
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+
+    Route::get('/', [
+        'uses' => 'Admin\IndexController@index',
+        'as' => 'adminIndex'
+    ]);
+
+    Route::resource('/articles', 'Admin\ArticlesController');
+
+});
