@@ -55,11 +55,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-/*Route::get('/admin', [
-    'uses' => 'Admin\IndexController@index',
-    'as' => 'adminIndex'
-])->middleware('auth');*/
-
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
@@ -71,3 +66,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('/articles', 'Admin\ArticlesController');
 
 });
+
+Route::get('/admin/articles', [
+    'uses' => 'Admin\ArticlesController@index',
+    'as'   => 'adminArticles'
+])->middleware('auth');
