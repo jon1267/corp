@@ -62,7 +62,7 @@ class User extends Authenticatable
         }
     }
 
-   // hasRole() - string or ['role1','role2',...]
+   // hasRole() - string or ['role1','role2',...] аналог, canDo()
     public function hasRole($name, $require = false) {
         if(is_array($name)) {
             foreach($name as $roleName) {
