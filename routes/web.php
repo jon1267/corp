@@ -67,7 +67,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 });
 
-Route::get('/admin/articles', [
+/*Route::get('/admin/articles', [
     'uses' => 'Admin\ArticlesController@index',
     'as'   => 'adminArticles'
-])->middleware('auth');
+])->middleware('auth');*/
+
+
+/*Route::get('/admin', [
+    'uses' => 'Admin\IndexController@index',
+    'as'   => 'adminIndex'
+])->middleware('auth');*/
