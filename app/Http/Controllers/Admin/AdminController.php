@@ -28,6 +28,8 @@ class AdminController extends \Corp\Http\Controllers\Controller
         /*if (!$this->user) {
             abort(403);
         }*/
+
+        //$this->template = env('THEME').'.layouts.admin';
     }
 
     public function renderOutput() {
@@ -53,12 +55,12 @@ class AdminController extends \Corp\Http\Controllers\Controller
 
         //$menu->add('Статьи', ['route' => 'admin.articles.index']);
         return Menu::make('adminMenu', function($menu) {
-            $menu->add('Статьи', 'admin/articles');
+            $menu->add('Статьи', ['route' =>'admin.articles.index']);
 
-            $menu->add('Портфолио', 'admin/articles');
-            $menu->add('Меню', 'admin/articles');
-            $menu->add('Пользователи', 'admin/articles');
-            $menu->add('Привилегии', 'admin/articles');
+            $menu->add('Портфолио', ['route' =>'admin.articles.index']);
+            $menu->add('Меню', ['route' =>'admin.articles.index']);
+            $menu->add('Пользователи', ['route' =>'admin.articles.index']);
+            $menu->add('Привилегии', ['route' =>'admin.articles.index']);
         });
     }
 }

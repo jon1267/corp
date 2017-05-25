@@ -29,6 +29,7 @@ class IndexController extends AdminController
 
         //$this->user = Auth::user(); //тут работает
 
+        //$this->template = env('THEME').'.admin.index';
 
         $this->title = 'Панель администратора  ';
         return $this->renderOutput();

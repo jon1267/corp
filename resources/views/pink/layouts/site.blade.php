@@ -83,6 +83,7 @@
     <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.tweetable.js"></script>
     {{--тут - наши скрипты: (les19 10:15) добавл. комментов ajax без перез.стр... --}}
     <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/myscripts.js"></script>
+    {{-- ckeditor --}}
 
 </head>
 <!-- END HEAD -->
@@ -93,82 +94,82 @@
 <!-- START BG SHADOW -->
 <div class="bg-shadow">
 
-    <!-- START WRAPPER -->
-    <div id="wrapper" class="group">
+<!-- START WRAPPER -->
+<div id="wrapper" class="group">
 
-        <!-- START HEADER -->
-        <div id="header" class="group">
+    <!-- START HEADER -->
+    <div id="header" class="group">
 
-            <div class="group inner">
+        <div class="group inner">
 
-                <!-- START LOGO -->
-                <div id="logo" class="group">
-                    <a href="/" title="Pink Rio"><img src="{{ asset(env('THEME')) }}/images/logo.png" title="Pink Rio" alt="Pink Rio" /></a>
-                </div>
-                <!-- END LOGO -->
-
-                <div id="sidebar-header" class="group">
-                    <div class="widget-first widget yit_text_quote">
-                        <blockquote class="text-quote-quote">&#8220;The caterpillar does all the work but the butterfly gets all the publicity.&#8221;</blockquote>
-                        <cite class="text-quote-author">George Carlin</cite>
-                    </div>
-                </div>
-                <div class="clearer"></div>
-
-                <hr />
-
-                <!-- START MAIN NAVIGATION -->
-                    @yield('navigation')
-                <!-- END MAIN NAVIGATION -->
-                <div id="header-shadow"></div>
-                <div id="menu-shadow"></div>
+            <!-- START LOGO -->
+            <div id="logo" class="group">
+                <a href="/" title="Pink Rio"><img src="{{ asset(env('THEME')) }}/images/logo.png" title="Pink Rio" alt="Pink Rio" /></a>
             </div>
+            <!-- END LOGO -->
+
+            <div id="sidebar-header" class="group">
+                <div class="widget-first widget yit_text_quote">
+                    <blockquote class="text-quote-quote">&#8220;The caterpillar does all the work but the butterfly gets all the publicity.&#8221;</blockquote>
+                    <cite class="text-quote-author">George Carlin</cite>
+                </div>
+            </div>
+            <div class="clearer"></div>
+
+            <hr />
+
+            <!-- START MAIN NAVIGATION -->
+                @yield('navigation')
+            <!-- END MAIN NAVIGATION -->
+            <div id="header-shadow"></div>
+            <div id="menu-shadow"></div>
         </div>
-        <!-- END HEADER -->
-
-        <!-- START SLIDER -->
-            @yield('slider')
-        <!-- END SLIDER -->
-            <div class="wrap_result"></div>
-
-            @if(Route::currentRouteName() == 'portfolios.index')
-            <div id="page-meta">
-                <div class="inner group">
-                    <h3>Welcome to my portfolio page</h3>
-                    <h4>... i hope you enjoy my works</h4>
-                </div>
-            </div>
-            @endif
-
-            @if(Route::currentRouteName() == 'contacts')
-            <div id="page-meta">
-                <div class="inner group">
-                    <h3>...Say Hello! :)</h3>
-                    <h4>Get in touch with Pink Rio team</h4>
-                </div>
-            </div>
-            @endif
-
-        <!-- START PRIMARY -->
-        <div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no' }}">
-            <div class="inner group">
-                <!-- START CONTENT -->
-                    @yield('content')
-                <!-- END CONTENT -->
-                <!-- START SIDEBAR -->
-                    @yield('bar')
-                <!-- END SIDEBAR -->
-                <!-- START EXTRA CONTENT -->
-                <!-- END EXTRA CONTENT -->
-            </div>
-        </div>
-        <!-- END PRIMARY -->
-
-        <!-- START COPYRIGHT -->
-            @yield('footer')
-        <!-- END COPYRIGHT -->
     </div>
-    <!-- END WRAPPER -->
+    <!-- END HEADER -->
+
+    <!-- START SLIDER -->
+        @yield('slider')
+    <!-- END SLIDER -->
+        <div class="wrap_result"></div>
+
+        @if(Route::currentRouteName() == 'portfolios.index')
+        <div id="page-meta">
+            <div class="inner group">
+                <h3>Welcome to my portfolio page</h3>
+                <h4>... i hope you enjoy my works</h4>
+            </div>
+        </div>
+        @endif
+
+        @if(Route::currentRouteName() == 'contacts')
+        <div id="page-meta">
+            <div class="inner group">
+                <h3>...Say Hello! :)</h3>
+                <h4>Get in touch with Pink Rio team</h4>
+            </div>
+        </div>
+        @endif
+
+    <!-- START PRIMARY -->
+    <div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no' }}">
+        <div class="inner group">
+            <!-- START CONTENT -->
+                @yield('content')
+            <!-- END CONTENT -->
+            <!-- START SIDEBAR -->
+                @yield('bar')
+            <!-- END SIDEBAR -->
+            <!-- START EXTRA CONTENT -->
+            <!-- END EXTRA CONTENT -->
+        </div>
+    </div>
+    <!-- END PRIMARY -->
+
+    <!-- START COPYRIGHT -->
+        @yield('footer')
+    <!-- END COPYRIGHT -->
+</div>
+<!-- END WRAPPER -->
 </div>
 <!-- END BG SHADOW -->
 

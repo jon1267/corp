@@ -2,6 +2,7 @@
 
 namespace Corp\Http\Controllers\Admin;
 
+use Corp\Category;
 use Corp\Repositories\ArticlesRepository;
 use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
@@ -50,7 +51,24 @@ class ArticlesController extends AdminController
      */
     public function create()
     {
-        //
+        if (Gate::denies('save', new \Corp\Article) ) {
+            abort(403);
+        }
+        $this->title = 'Добавить новый материал';
+        $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
+
+        $lists = [];
+
+        foreach ($categories as $category) {
+            if ($category->parent_id == 0) {
+                $lists[$category->title] = [];
+            } else {
+                $lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
+            }
+        }
+        $this->content = view(env('THEME').'.admin.articles_create_content')->with('categories', $lists)->render();
+
+        return $this->renderOutput();
     }
 
     /**
