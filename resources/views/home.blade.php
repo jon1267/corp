@@ -10,6 +10,14 @@
                 <div class="panel-body">
                     You are logged in!
                 </div>
+
+                <div class="panel-body">
+                    @if($user)
+                        <p>User name: {{ $user->name }}</p>
+                        <p>User email: {{ $user->email }}</p>
+                    @endif
+                </div>
+
             </div>
         </div>
     </div>

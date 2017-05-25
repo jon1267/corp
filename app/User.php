@@ -40,7 +40,7 @@ class User extends Authenticatable
     // Если $require = true, то в [] должны быть все разрешения, чтоб canDo вернул true
     public function canDo($permission, $require = false) {
         if(is_array($permission)) {
-            foreach($permission as $permName) {
+            /*foreach($permission as $permName) {
 
                 $permName = $this->canDo($permName);
                 if ($permName && !$require) {
@@ -49,7 +49,9 @@ class User extends Authenticatable
                     return false;
                 }
             }
-            return $require;
+            return $require;*/
+
+            dump($permission);
 
         } else {
             foreach ($this->roles as $role) {

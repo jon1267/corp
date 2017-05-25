@@ -22,8 +22,7 @@ class AdminController extends \Corp\Http\Controllers\Controller
 
     public function __construct()
     {
-        $this->user = Auth::user();//Auth::user() вернет объект аут.польз.
-
+        //$this->user = Auth::user();//Auth::user() вернет объект аут.польз.
         //dd($this->user);
 
         /*if (!$this->user) {

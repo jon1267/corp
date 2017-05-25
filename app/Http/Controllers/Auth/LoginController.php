@@ -27,8 +27,8 @@ class LoginController extends Controller
      */
 
     // 2 строки ниже добавил я...
-    protected $loginView;
-    protected $username = 'login';
+    ////protected $loginView;
+    ////protected $username = 'login';
 
     //protected $redirectTo = '/home';
     protected $redirectTo = '/admin';
@@ -43,10 +43,10 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
 
         // строку ниже тоже добавил я...
-        $this->loginView = env('THEME').'.login';
+        ////$this->loginView = env('THEME').'.login';
     }
 
- /*   public function showLoginForm() {
+/*    public function showLoginForm() {
 
         $view = property_exists($this,'loginView') ? $this->loginView : '';
 

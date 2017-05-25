@@ -178,6 +178,9 @@ return [
         Corp\Providers\EventServiceProvider::class,
         Corp\Providers\RouteServiceProvider::class,
 
+        // https://laravelcollective.com/  Forms & HTML
+        Collective\Html\HtmlServiceProvider::class,
+
         // Lavary Menu (https://github.com/lavary/laravel-menu)
         'Lavary\Menu\ServiceProvider',
 
@@ -230,6 +233,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Menu' => 'Lavary\Menu\Facade',
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
