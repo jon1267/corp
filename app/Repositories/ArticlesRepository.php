@@ -19,4 +19,9 @@ class ArticlesRepository extends Repository {
         }
         return $article;
     }
+
+    public function addArticle($request) {
+        
+    }
+
 }

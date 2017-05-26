@@ -1,4 +1,6 @@
-@extends(env('THEME').'.layouts.site')
+{{--@extends(env('THEME').'.layouts.site') --}}
+{{-- !!! вот почему в админке не было ckeditor'a--}}
+@extends(env('THEME').'.layouts.admin')
 
 @section('navigation')
     {!! $navigation !!}
