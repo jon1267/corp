@@ -2,13 +2,14 @@
 
 namespace Corp\Http\Controllers\Admin;
 
-use Corp\Category;
 use Corp\Repositories\ArticlesRepository;
 use Illuminate\Http\Request;
 use Corp\Http\Requests\ArticleRequest;
-
 use Corp\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Gate;
+use Corp\Category;
+use Corp\Article;
 
 class ArticlesController extends AdminController
 {
@@ -57,6 +58,7 @@ class ArticlesController extends AdminController
             abort(403);
         }
         $this->title = 'Добавить новый материал';
+
         $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
 
         $lists = [];
@@ -106,9 +108,36 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($alias)
+    //public function edit(Article $article)
     {
-        //
+        /*  ошибка ModelNotFoundException in Builder.php line 396:
+            No query results for model [Corp\Article].
+            поэтому переделываю...*/
+
+        $article = Article::where('alias', $alias)->first();
+        //dd($article); // так вроде ОК.
+        if(Gate::denies('edit', new Article())) abort(403);
+
+        $article->img = json_decode($article->img);
+
+        $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
+
+        $lists = [];
+
+        foreach ($categories as $category) {
+            if ($category->parent_id == 0) {
+                $lists[$category->title] = [];
+            } else {
+                $lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
+            }
+        }
+        $this->title = 'Редактирование материала - '.$article->title;
+
+        $this->content = view(env('THEME').'.admin.articles_create_content')->with(['categories' => $lists, 'article' => $article])->render();
+
+        return $this->renderOutput();
+
     }
 
     /**

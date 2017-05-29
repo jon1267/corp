@@ -183,6 +183,8 @@ return [
 
         // Lavary Menu (https://github.com/lavary/laravel-menu)
         'Lavary\Menu\ServiceProvider',
+        // http://image.intervention.io/ PHP image handling and manipulation lib
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -235,6 +237,7 @@ return [
         'Menu' => 'Lavary\Menu\Facade',
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

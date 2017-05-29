@@ -24,8 +24,11 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
         parent::boot();
+        // чето не работает...чють переделываю см ArticlesController стр 110
+        /*Route::bind('articles', function($value) {
+            return Article::where('alias',$value)->first();
+        });*/
     }
 
     /**
