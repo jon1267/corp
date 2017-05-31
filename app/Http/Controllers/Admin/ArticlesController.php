@@ -173,8 +173,20 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    //public function destroy($id)
+    public function destroy($alias)
     {
-        return 'Deleeting '.$id;
+        $article = Article::whereAlias($alias)->first();
+        //$article = Article::where('alias', $alias)->first();
+        //$article = Article::where('alias','=', $alias)->first();
+        // эти три варианта (выше) делают одно и тоже...
+        //dd($article);
+
+        $result = $this->a_rep->deleteArticle($article);
+        //dd($result);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 }

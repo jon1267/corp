@@ -141,4 +141,19 @@ class ArticlesRepository extends Repository {
 
     }
 
+    public function deleteArticle($article) {
+
+        if(Gate::denies('destroy',$article)) {
+            abort(403, 'Удаление запрещено');
+        }
+        // это вызов метода ! comments(), (а не динамич свойства comments)
+        // а метод возвращает объект констр. запр. и знач. доступен метод delete()
+        // динамич свойство возвращает коллекцию моделей (там вроде нет ??? )
+        // т.о. это удаление связанных со статьей комментариев...
+        $article->comments()->delete();
+        if ($article->delete()) {
+            return ['status' => 'Материал удален'];
+        }
+    }
+
 }
