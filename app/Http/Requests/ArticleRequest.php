@@ -24,6 +24,14 @@ class ArticleRequest extends FormRequest
         $validator = parent::getValidatorInstance();
 
         $validator->sometimes('alias', 'unique:articles|max:255', function ($input) {
+
+            //dd($this->route()->hasParameter('article'));
+            if($this->route()->hasParameter('article')) {
+                $model = $this->route()->parameter('article');
+                //dd(is_string($input->alias), $input->alias);
+
+                return ($model !== $input->alias) && !empty($input->alias);
+            }
             return !empty($input->alias);
         });
         return $validator;

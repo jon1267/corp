@@ -2,12 +2,14 @@
 
 namespace Corp\Http\Controllers\Admin;
 
-use Corp\Repositories\ArticlesRepository;
 use Illuminate\Http\Request;
 use Corp\Http\Requests\ArticleRequest;
 use Corp\Http\Controllers\Controller;
+use Corp\Http\Requests;
 
-use Illuminate\Support\Facades\Gate;
+use Corp\Repositories\ArticlesRepository;
+
+use Gate;
 use Corp\Category;
 use Corp\Article;
 
@@ -147,9 +149,22 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    //public function update(ArticleRequest $request, Article $article)
+    public function update(ArticleRequest $request, $alias)
     {
-        //
+        // не нормально отрабатывает при обновл. поля алиас...если его не трогать - ОК.
+        // ну оно и понятно - по алиасу отыскивается статья, потому он вместо парам алиас
+        // сделал Article $article
+        $article = Article::where('alias', $alias)->first();
+        //dd($article);
+
+        $result = $this->a_rep->updateArticle($request, $article);
+        //dd($result);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
+
     }
 
     /**
@@ -160,6 +175,6 @@ class ArticlesController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        return 'Deleeting '.$id;
     }
 }
