@@ -121,6 +121,8 @@ class ArticlesController extends AdminController
         //dd($article); // так вроде ОК.
         if(Gate::denies('edit', new Article())) abort(403);
 
+        // тут лезет ошибка - если ссылка на несуществующий
+        // или удленный ранее материал (тогда $article = null...)
         $article->img = json_decode($article->img);
 
         $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
