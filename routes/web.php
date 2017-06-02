@@ -65,10 +65,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     // Route::resource('/articles', 'Admin\ArticlesController');
     Route::resource('/articles', 'Admin\ArticlesController', ['names' => [
-        'index' => 'admin.articles.index',
-        'create' => 'admin.articles.create',
-        'store' => 'admin.articles.store',
-        'update' => 'admin.articles.update',
+        'index'   => 'admin.articles.index',
+        'create'  => 'admin.articles.create',
+        'store'   => 'admin.articles.store',
+        'update'  => 'admin.articles.update',
         'destroy' => 'admin.articles.destroy',
         'show' => 'admin.articles.show',
         'edit' => 'admin.articles.edit',
