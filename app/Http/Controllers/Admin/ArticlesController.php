@@ -80,7 +80,7 @@ class ArticlesController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ArticleRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(ArticleRequest $request)
@@ -107,7 +107,7 @@ class ArticlesController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $alias
      * @return \Illuminate\Http\Response
      */
     public function edit($alias)
@@ -147,11 +147,11 @@ class ArticlesController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  ArticleRequest  $request
+     * @param  string  $alias
      * @return \Illuminate\Http\Response
      */
-    //public function update(ArticleRequest $request, Article $article)
+    //public function update(ArticleRequest $request, Article $article) //так ошибки
     public function update(ArticleRequest $request, $alias)
     {
         // не нормально отрабатывает при обновл. поля алиас...если его не трогать - ОК.
