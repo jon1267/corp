@@ -4,6 +4,9 @@ namespace Corp\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
+use Corp\Repositories\PermissionsRepository;
+use Corp\Repositories\RolesRepository;
+use Gate;
 
 class PermissionsController extends AdminController
 {
@@ -13,7 +16,15 @@ class PermissionsController extends AdminController
 
     public function __construct(PermissionsRepository $per_rep, RolesRepository $rol_rep)
     {
+        parent::__construct();
 
+        if(!Gate::denies('EDIT_USERS')) {
+            abort(403,'Нет прав менять разрешения');
+        }
+
+        $this->per_rep = $per_rep;
+        $this->rol_rep = $rol_rep;
+        $this->template = env('THEME').'.admin.permissions';
     }
 
     /**
@@ -24,6 +35,23 @@ class PermissionsController extends AdminController
     public function index()
     {
         //
+        $this->title = 'Менеджер прав пользователей';
+        $roles = $this->getRoles();//getRoles() вернет коллекцию доступных ролей
+        $permissions = $this->getPermissions();
+        dd($permissions);
+
+    }
+
+    public function getRoles() {
+
+        $roles = $this->rol_rep->get();//get(['id','name']) выбрать два поля или все
+        return $roles;
+    }
+
+    public function getPermissions() {
+
+        $permissions = $this->per_rep->get();
+        return $permissions;
     }
 
     /**
