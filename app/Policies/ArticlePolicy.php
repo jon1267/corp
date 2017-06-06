@@ -17,7 +17,7 @@ class ArticlePolicy
      */
     public function __construct()
     {
-        
+
     }
 
     public function save(User $user) {
