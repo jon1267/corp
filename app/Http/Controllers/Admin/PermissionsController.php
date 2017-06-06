@@ -38,8 +38,10 @@ class PermissionsController extends AdminController
         $this->title = 'Менеджер прав пользователей';
         $roles = $this->getRoles();//getRoles() вернет коллекцию доступных ролей
         $permissions = $this->getPermissions();
-        dd($permissions);
 
+        $this->content = view(env('THEME').'.admin.permissions_content')->with(['roles'=>$roles, 'priv'=>$permissions])->render();
+
+        return $this->renderOutput();
     }
 
     public function getRoles() {
