@@ -1,3 +1,8 @@
+{{--
+Рисует табличку привилегий с чекбоксами. В чекбоксах ставим "псицы"
+тем самым даем/отменяем привилегию. По кнопе сохранить - сложное сохранение
+--}}
+
 <div id="content-page" class="content group">
     <div class="hentry group">
         <h3 class="title_page">Привилегии</h3>
@@ -21,9 +26,9 @@
                                     @foreach($roles as $role)
                                         <td>
                                             @if($role->hasPermission($val->name))
-                                                <input checked name="" type="checkbox" value="">
+                                                <input checked name="{{ $role->id }}[]" type="checkbox" value="{{ $val->id }}">
                                             @else
-                                                <input name="" type="checkbox" value="">
+                                                <input name="{{ $role->id }}[]" type="checkbox" value="{{ $val->id }}">
                                             @endif
                                         </td>
                                     @endforeach
