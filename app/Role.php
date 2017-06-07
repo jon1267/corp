@@ -37,4 +37,13 @@ class Role extends Model
         return false;
     }
 
+    public function savePermissions($inputPermissions) {
+        if(!empty($inputPermissions)) {
+            $this->perms()->sync($inputPermissions);// привязывание связ. записей
+        } else {
+            $this->perms()->detach();// отвязывание связ. записей для табл permission_role ?
+        }
+        return true;
+    }
+
 }
