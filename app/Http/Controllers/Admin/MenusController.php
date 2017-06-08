@@ -39,7 +39,10 @@ class MenusController extends AdminController
     {
         //
         $menu = $this->getMenus();
-        $this->content = view(env('THEME').'.admin.menus_content')->with('menu', $menu);
+        $this->content = view(env('THEME').'.admin.menus_content')
+            ->with('menus', $menu)->render();
+
+        return $this->renderOutput();
     }
 
     public function getMenus() {
