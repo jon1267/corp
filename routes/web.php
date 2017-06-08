@@ -84,6 +84,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'edit' => 'admin.permissions.edit',
     ]]);
 
+    Route::resource('/menus', 'Admin\MenusController', ['names' => [
+        'index'   => 'admin.menus.index',
+        'create'  => 'admin.menus.create',
+        'store'   => 'admin.menus.store',
+        'update'  => 'admin.menus.update',
+        'destroy' => 'admin.menus.destroy',
+        'show' => 'admin.menus.show',
+        'edit' => 'admin.menus.edit',
+    ]]);
+
+
 });
 
 /*Route::get('/admin/articles', [
