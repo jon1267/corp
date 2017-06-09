@@ -1,8 +1,8 @@
 <div id="content-page" class="content group">
     <div class="hentry group">
-        <h3 class="title_page">Содержимое меню</h3>
+        <h4 class="title_page">Меню сайта</h4>
         <div class="short-table white">
-            <table style="width: 100%" cellspacing="0" cellpadding="0">
+            <table style="width: 100%"  cellspacing="0" cellpadding="0">
                 <thead>
                     <th>Name</th>
                     <th>Link</th>
@@ -14,6 +14,6 @@
                 @endif
             </table>
         </div>
-        {!! Html::link('admin.menus.create','Добавить пункт', ['class' => 'btn btn-the-salmon-dance-3']) !!}
+        {!! Html::link(route('admin.menus.create'),'Добавить пункт', ['class' => 'btn btn-the-salmon-dance-3']) !!}
     </div>
 </div>
