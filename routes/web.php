@@ -94,7 +94,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'edit' => 'admin.menus.edit',
     ]]);
 
-
 });
 
 /*Route::get('/admin/articles', [
