@@ -72,7 +72,9 @@ class MenusController extends AdminController
      */
     public function create()
     {
-        //
+        $this->title = 'Новый пункт меню';
+
+        $menus = $this->getMenus();
     }
 
     /**
