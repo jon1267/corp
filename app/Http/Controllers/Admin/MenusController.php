@@ -73,8 +73,12 @@ class MenusController extends AdminController
     public function create()
     {
         $this->title = 'Новый пункт меню';
+        $tmp = $this->getMenus()->roots(); //в $tmp родительские (главн) п.меню
+        $menus = $tmp->reduce(function ($returnMenus) {
 
-        $menus = $this->getMenus();
+        }, ['0' => 'Родительский пункт меню']);
+        dd($menus);
+
     }
 
     /**
