@@ -79,11 +79,31 @@ class MenusController extends AdminController
             return $returnMenus;
         }, ['0' => 'Родительский пункт меню']);
         //dd($menus);//т.е $tmp->reduce() вернет массив...
+
         $categories = \Corp\Category::select(['title', 'alias', 'parent_id', 'id'])->get();
         //dd($categories);// а \Corp\Category::select([...])->get() - коллекцию...
+
         $list = [];
         $list = array_add($list, '0', 'Не используется');
         $list = array_add($list, 'parent', 'Раздел блог');
+
+        foreach($categories as $category) {
+            if ($category->parent_id == 0) {
+                $list[$category->title] = [];
+            } else {
+                $list[$categories->where('id', $category->parent_id)->first()->title][$category->alias] = $category->title;
+            }
+        }
+        //dd($list);
+
+        $articles = $this->a_rep->get(['id', 'title', 'alias']);
+
+        $articles = $articles->reduce(function($returnArticles, $article) {
+            $returnArticles[$article->alias] = $article->title;
+            return $returnArticles;
+        }, []);
+        dd($articles);
+
     }
 
     /**
