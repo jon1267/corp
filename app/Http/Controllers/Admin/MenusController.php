@@ -74,11 +74,16 @@ class MenusController extends AdminController
     {
         $this->title = 'Новый пункт меню';
         $tmp = $this->getMenus()->roots(); //в $tmp родительские (главн) п.меню
-        $menus = $tmp->reduce(function ($returnMenus) {
-
+        $menus = $tmp->reduce(function ($returnMenus, $menu) {
+            $returnMenus[$menu->id] = $menu->title;
+            return $returnMenus;
         }, ['0' => 'Родительский пункт меню']);
-        dd($menus);
-
+        //dd($menus);//т.е $tmp->reduce() вернет массив...
+        $categories = \Corp\Category::select(['title', 'alias', 'parent_id', 'id'])->get();
+        //dd($categories);// а \Corp\Category::select([...])->get() - коллекцию...
+        $list = [];
+        $list = array_add($list, '0', 'Не используется');
+        $list = array_add($list, 'parent', 'Раздел блог');
     }
 
     /**
