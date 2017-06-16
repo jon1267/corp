@@ -30,11 +30,26 @@ class MenusRepository extends Repository {
                 if($request->input('category_alias')) {
                     if($request->input('category_alias') == 'parent') {
                         $data['path'] = route('articles.index');
+                    } else {
+                        $data['path'] = route('articlesCat', ['cat_alias'=>$request->input('category_alias')]);
                     }
+                } elseif($request->input('article_alias')) {
+                    $data['path'] = route('articles.show', ['alias' => $request->input('article_alias')]);
                 }
-
             break;
 
+            case 'portfolioLink':
+                if($request->input('filter_alias')) {
+                    if($request->input('filter_alias') == 'parent') {
+                        $data['path'] = route('portfolios.index');
+                    }
+                } elseif($request->input('portfolio_alias')) {
+                    $data['path'] = route('portfolios.show', ['alias' => $request->input('portfolio_alias')]);
+                }
+            break;
+            // не прошел ни один из кейсов
+            /*default :
+                return ['error'=>'Невозможно создать меню, нет ссылки'];*/
         }
 
         unset($data['type']);
