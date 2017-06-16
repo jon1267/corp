@@ -6,6 +6,7 @@ use Corp\Repositories\ArticlesRepository;
 use Corp\Repositories\MenusRepository;
 use Corp\Repositories\PortfoliosRepository;
 use Illuminate\Http\Request;
+use Corp\Http\Requests\MenusRequest;;
 use Corp\Http\Controllers\Controller;
 use Gate;
 use Menu;
@@ -133,9 +134,14 @@ class MenusController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenusRequest $request)
     {
         //
+        $result = $this->m_rep->addMenu($request);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 
     /**

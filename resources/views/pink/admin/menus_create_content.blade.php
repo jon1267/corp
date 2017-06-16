@@ -36,7 +36,7 @@
 
         <h3>Тип меню:</h3>
 
-        <div id="accordion">
+        <div id="accordion" style="width: 96%">
 
             <h3>{!! Form::radio('type', 'customLink',(isset($type) && $type == 'customLink') ? TRUE : FALSE,['class' => 'radioMenu']) !!}
                 <span class="label">Пользовательская ссылка:</span></h3>
@@ -65,7 +65,7 @@
                 <li class="text-field">
                     <label for="name-contact-us">
                         <span class="label">Ссылка на категорию блога:</span>
-                        <br />
+                        <br>
                         <span class="sublabel">Ссылка на категорию блога</span><br />
                     </label>
                     <div class="input-prepend">
@@ -80,7 +80,7 @@
                 <li class="text-field">
                     <label for="name-contact-us">
                         <span class="label">Ссылка на материал блога:</span>
-                        <br />
+                        <br>
                         <span class="sublabel">Ссылка на материал блога</span><br />
                     </label>
                     <div class="input-prepend">
