@@ -172,12 +172,29 @@ class MenusController extends AdminController
         $option = false;
         // path - http://corp54.loc/articles
         //app('router')->getRoutes()->match(app('request')); соотв текущему запросу находящ. в адресной строке прямо сйчас...
-        dd(app('router')->getRoutes()->match(app('request')->create($menu->path)));
+        $route = app('router')->getRoutes()->match(app('request')->create($menu->path));
 
+        $aliasRoute = $route->getName();
+        $parameters = $route->parameters();
 
+        //dump($aliasRoute);
+        //dump($parameters);
 
-        $aliasRoute = false;
-        $parameters = false;
+        if($aliasRoute == 'articles.index' || $aliasRoute == 'articlesCat') {
+            $type = 'blogLink';
+            $option = isset($parameters['cat_alias']) ? $parameters['cat_alias'] : 'parent';
+        } elseif($aliasRoute == 'articles.show') {
+            $type = 'blogLink';
+            $option = isset($parameters['alias']) ? $parameters['alias'] : '';
+        } elseif($aliasRoute == 'portfolios.index') {
+            $type = 'portfolioLink';
+            $option = 'parent';
+        } elseif($aliasRoute == 'portfolios.show') {
+            $type = 'portfolioLink';
+            $option = isset($parameters['alias']) ? $parameters['alias'] : '';
+        } else {
+            $type = 'customLink';
+        }
 
         $tmp = $this->getMenus()->roots(); //в $tmp родительские (главн) п.меню
 
