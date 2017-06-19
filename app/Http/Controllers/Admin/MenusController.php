@@ -158,12 +158,85 @@ class MenusController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(\Corp\Menu $menu)
     {
-        //
+        // dd($menu); работает вместе с RouteServiceProvider строка 34
+        // Далее тупо копипастим весь код из create()
+
+        $this->title = 'Редактирование ссылки меню - ' . $menu->title;
+
+        $type = false;
+        $option = false;
+        // path - http://corp54.loc/articles
+        //app('router')->getRoutes()->match(app('request')); соотв текущему запросу находящ. в адресной строке прямо сйчас...
+        dd(app('router')->getRoutes()->match(app('request')->create($menu->path)));
+
+
+
+        $aliasRoute = false;
+        $parameters = false;
+
+        $tmp = $this->getMenus()->roots(); //в $tmp родительские (главн) п.меню
+
+        $menus = $tmp->reduce(function ($returnMenus, $menu) {
+            $returnMenus[$menu->id] = $menu->title;
+            return $returnMenus;
+        }, ['0' => 'Родительский пункт меню']);
+        //dd($menus);//т.е $tmp->reduce() вернет массив...
+
+        $categories = \Corp\Category::select(['title', 'alias', 'parent_id', 'id'])->get();
+        //dd($categories);// а \Corp\Category::select([...])->get() - коллекцию...
+
+        $list = [];
+        $list = array_add($list, '0', 'Не используется');
+        $list = array_add($list, 'parent', 'Раздел блог');
+
+        foreach($categories as $category) {
+            if ($category->parent_id == 0) {
+                $list[$category->title] = [];
+            } else {
+                $list[$categories->where('id', $category->parent_id)->first()->title][$category->alias] = $category->title;
+            }
+        }
+        //dd($list);
+
+        $articles = $this->a_rep->get(['id', 'title', 'alias']);
+
+        $articles = $articles->reduce(function($returnArticles, $article) {
+            $returnArticles[$article->alias] = $article->title;
+            return $returnArticles;
+        }, []);
+        //dd($articles);
+
+        $filters = \Corp\Filter::select('id', 'title', 'alias')->get()->reduce(function($returnFilters, $filter) {
+            $returnFilters[$filter->alias] = $filter->title;
+            return $returnFilters;
+        }, ['parent' => 'Раздел портфолио']);
+        //dd($filters);
+
+        $portfolios = $this->p_rep->get(['id', 'title', 'alias'])->reduce(function($returnPortfolio, $portfolio) {
+            $returnPortfolio[$portfolio->alias] = $portfolio->title;
+            return $returnPortfolio;
+        }, []);
+        //dd($portfolios);
+
+        $this->content = view(env('THEME').'.admin.menus_create_content')->with([
+            'menu'=> $menu,
+            'type'=> $type,
+            'option'=> $option,
+            'menus' => $menus,
+            'categories' => $list,
+            'articles' => $articles,
+            'filters' => $filters,
+            'portfolios' => $portfolios
+        ])->render();
+
+        return $this->renderOutput();
+
+
     }
 
     /**
