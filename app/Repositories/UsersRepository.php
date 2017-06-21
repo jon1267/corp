@@ -32,66 +32,33 @@ class UsersRepository extends Repository {
         return ['status' => 'Пользователь добавлен'];
     }
 
-    public function updateMenu($request, $menu) {
-        // тут 'save' надо менять на 'update' и создавать др. разрешение...)
-        if(Gate::denies('save', $this->model)) {
-            abort(403, 'Сохранение меню запрещено');
+    public function updateUser($request, $user) {
+
+        if(Gate::denies('edit', $this->model)) {
+            abort(403, 'Сохранение пользователя запрещено');
         }
-        $data = $request->only('type','title','parent');
+        $data = $request->all();
 
-        if(empty($data)) return ['error'=>'Нет данных для создания меню'];
-
-        //dd($request->all());
-
-        switch ($data['type']) {
-            case 'customLink':
-                $data['path'] = $request->input('custom_link');
-                break;
-
-            case 'blogLink':
-                if($request->input('category_alias')) {
-                    if($request->input('category_alias') == 'parent') {
-                        $data['path'] = route('articles.index');
-                    } else {
-                        $data['path'] = route('articlesCat', ['cat_alias'=>$request->input('category_alias')]);
-                    }
-                } elseif($request->input('article_alias')) {
-                    $data['path'] = route('articles.show', ['alias' => $request->input('article_alias')]);
-                }
-                break;
-
-            case 'portfolioLink':
-                if($request->input('filter_alias')) {
-                    if($request->input('filter_alias') == 'parent') {
-                        $data['path'] = route('portfolios.index');
-                    }
-                } elseif($request->input('portfolio_alias')) {
-                    $data['path'] = route('portfolios.show', ['alias' => $request->input('portfolio_alias')]);
-                }
-                break;
-            // не прошел ни один из кейсов
-            /*default :
-                return ['error'=>'Невозможно создать меню, нет ссылки'];*/
+        if(isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
-
-        unset($data['type']);
         //dd($data);
+        $user->fill($data)->update();
+        $user->roles()->sync([$data['role_id']]);
 
-        // текущий объект модели (Menu) заполняем данными из $data и сохраняем
-        // и если все без ошибок - вернем 'status' с сообщением
-        //if($this->model->fill($data)->save()) { // это из addMenu()
-        if($menu->fill($data)->update()) {
-            return ['status' => 'Ссылка обновлена'];
-        }
+        return ['status' => 'Пользователь изменен'];
     }
 
-    public function deleteMenu($menu) {
-        // тут 'save' надо менять на 'delete' и создавать др. разрешение...)
-        if(Gate::denies('save', $this->model)) {
-            abort(403, 'Удаление меню запрещено');
+    public function deleteUser($user) {
+
+        if(Gate::denies('edit', $this->model)) {
+            abort(403, 'Удаление пользователя запрещено');
         }
-        if($menu->delete()) {
-            return ['status' => 'Ссыка удалена'];
+
+        $user->roles()->detach();
+
+        if($user->delete()) {
+            return ['status' => 'Пользователь удален'];
         }
     }
 

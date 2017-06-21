@@ -58,6 +58,17 @@ class UsersController extends AdminController
     public function create()
     {
         //
+        $this->title = 'Новый пользователь';
+
+        $roles = $this->getRoles()->reduce(function($returnRoles, $role) {
+            $returnRoles[$role->id] = $role->name;
+            return $returnRoles;
+        }, []);
+        dd($roles);
+    }
+
+    public function getRoles() {
+        return \Corp\Role::all();
     }
 
     /**
