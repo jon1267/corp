@@ -3,6 +3,7 @@
 namespace Corp\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Corp\Http\Requests\UserRequest;
 use Corp\Http\Controllers\Controller;
 
 use Corp\Repositories\UsersRepository;
@@ -64,7 +65,11 @@ class UsersController extends AdminController
             $returnRoles[$role->id] = $role->name;
             return $returnRoles;
         }, []);
-        dd($roles);
+        //dd($roles);
+        $this->content = view(env('THEME').'.admin.users_create_content')
+            ->with('roles',$roles)->render();
+        return $this->renderOutput();
+
     }
 
     public function getRoles() {
@@ -74,12 +79,17 @@ class UsersController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Corp\Http\Requests\UserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         //
+        $result = $this->us_rep->addUser($request);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 
     /**
@@ -96,24 +106,38 @@ class UsersController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $this->title = 'Редактирование пользователя - '. $user->name;
+
+        $roles = $this->getRoles()->reduce(function($returnRoles, $role) {
+            $returnRoles[$role->id] = $role->name;
+            return $returnRoles;
+        }, []);
+
+        $this->content = view(env('THEME').'.admin.users_create_content')
+            ->with(['roles' => $roles, 'user' => $user])->render();
+
+        return $this->renderOutput();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  UserRequest  $request
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $result = $this->us_rep->updateUser($request, $user);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 
     /**
@@ -122,8 +146,12 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $result = $this->us_rep->deleteUser($user);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 }

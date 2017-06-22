@@ -19,7 +19,7 @@
                     <span class="sublabel">Имя</span><br />
                 </label>
                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-                    {!! Form::text('title',isset($user->name) ? $user->name  : old('name'), ['placeholder'=>'Введите ваше имя']) !!}
+                    {!! Form::text('name',isset($user->name) ? $user->name  : old('name'), ['placeholder'=>'Введите ваше имя']) !!}
                 </div>
             </li>
 
@@ -31,7 +31,7 @@
                     <span class="sublabel">Логин:</span><br />
                 </label>
                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-                    {!! Form::text('login', isset($user->login) ? $user->login : old('login'), ['placeholder'=>'Введите ваш логин']) !!}
+                    {!! Form::text('login', isset($user->login) ? $user->login : old('login'), ['placeholder'=>'Введите логин']) !!}
                 </div>
 
             </li>
@@ -43,7 +43,7 @@
                     <span class="sublabel">Email</span><br />
                 </label>
                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-                    {!! Form::text('email', isset($user->email) ? $user->email : old('email'), ['placeholder'=>'Введите ваш email']) !!}
+                    {!! Form::text('email', isset($user->email) ? $user->email : old('email'), ['placeholder'=>'Введите email']) !!}
                 </div>
 
             </li>

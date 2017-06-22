@@ -6,7 +6,7 @@ use Corp\Repositories\ArticlesRepository;
 use Corp\Repositories\MenusRepository;
 use Corp\Repositories\PortfoliosRepository;
 use Illuminate\Http\Request;
-use Corp\Http\Requests\MenusRequest;;
+use Corp\Http\Requests\MenusRequest;
 use Corp\Http\Controllers\Controller;
 use Gate;
 use Menu;

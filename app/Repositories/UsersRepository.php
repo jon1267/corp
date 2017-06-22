@@ -12,13 +12,14 @@ class UsersRepository extends Repository {
     }
 
     public function addUser($request) {
-        if(\Gate::denies('create', $this->model)) {
+        if(!Gate::denies('create', $this->model)) {
             abort(403, 'Добавление пользователя запрещено');
         }
 
         $data = $request->all();
         //dd($request->all());
         $user = $this->model->create([
+        //$user = User::create([  // можно так
             'name' => $data['name'],
             'login' => $data['login'],
             'email' => $data['email'],
@@ -34,15 +35,20 @@ class UsersRepository extends Repository {
 
     public function updateUser($request, $user) {
 
-        if(Gate::denies('edit', $this->model)) {
+        if(!Gate::denies('edit', $this->model)) {
             abort(403, 'Сохранение пользователя запрещено');
         }
         $data = $request->all();
 
         if(isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
+        } else {
+            // этого else у автора курса небыло...шла ошибка типа ...пустой пароль
+            //$oldpass = $this->model->where('id',$user->id)->first(['email','password']);//шоб видеть что приходит
+            $oldpass = $this->model->where('id',$user->id)->first(['password']);
+            $data['password'] = $oldpass['password'];
         }
-        //dd($data);
+
         $user->fill($data)->update();
         $user->roles()->sync([$data['role_id']]);
 
@@ -51,7 +57,7 @@ class UsersRepository extends Repository {
 
     public function deleteUser($user) {
 
-        if(Gate::denies('edit', $this->model)) {
+        if(!Gate::denies('edit', $this->model)) {
             abort(403, 'Удаление пользователя запрещено');
         }
 
