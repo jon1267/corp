@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
 use Auth;
 use Menu;
+use Gate;
 
 //class AdminController extends Controller
 class AdminController extends \Corp\Http\Controllers\Controller
@@ -55,7 +56,12 @@ class AdminController extends \Corp\Http\Controllers\Controller
 
         //$menu->add('Статьи', ['route' => 'admin.articles.index']);
         return Menu::make('adminMenu', function($menu) {
-            $menu->add('Статьи', ['route' =>'admin.articles.index']);
+
+            // проверка, имеет ли право текущ польз на просмотр этого п.меню
+            /*if(Gate::allows('VIEW_ADMIN_ARTICLES')) {
+                $menu->add('Статьи', ['route' => 'admin.articles.index']);
+            }*/
+            $menu->add('Статьи', ['route' => 'admin.articles.index']);
 
             $menu->add('Портфолио', ['route' =>'admin.articles.index']);
             $menu->add('Меню', ['route' =>'admin.menus.index']);
