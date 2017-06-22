@@ -7,7 +7,7 @@
             @if(!$portfolios->isEmpty())
                 @foreach($portfolios as $portfolio)
                     <div class="hentry-post group">
-                        <div class="thumb-img"><img style="width: 55px" src="{{ asset(env('THEME')) }}/images/projects/{{ $portfolio->img->mini }}" alt="001" title="001" /></div>
+                        <div class="thumb-img"><img style="width: 55px" src="{{ asset(config('settings.theme')) }}/images/projects/{{ $portfolio->img->mini }}" alt="001" title="001" /></div>
                         <div class="text">
                             <a href="{{ route('portfolios.show', ['alias' => $portfolio->alias]) }}" title="{{ $portfolio->title }}" class="title">{{ $portfolio->title }}</a>
                             <p>{{ str_limit($portfolio->text, 130) }}</p>
@@ -27,7 +27,7 @@
             @foreach($comments as $comment)
                 <div class="the-post group">
                     <div class="avatar">
-                        {{--<img alt="" src="{{ asset(env('THEME')) }}/images/avatar/unknow55.png" class="avatar" />--}}
+                        {{--<img alt="" src="{{ asset(config('settings.theme')) }}/images/avatar/unknow55.png" class="avatar" />--}}
                         <img alt="" src="https://www.gravatar.com/avatar/{{(($comment->email) ? md5($comment->email) : $comment->user->email )}}?d=mm&s=55" class="avatar" />
                     </div>
                     <span class="author"><strong><a href="#">{{ isset($comment->user) ? $comment->user->name : $comment->name}}</a></strong> in</span>

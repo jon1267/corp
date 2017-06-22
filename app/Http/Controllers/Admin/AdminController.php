@@ -29,7 +29,7 @@ class AdminController extends \Corp\Http\Controllers\Controller
             abort(403);
         }*/
 
-        //$this->template = env('THEME').'.layouts.admin';
+        //$this->template = config('settings.theme').'.layouts.admin';
     }
 
     public function renderOutput() {
@@ -38,14 +38,14 @@ class AdminController extends \Corp\Http\Controllers\Controller
 
         $menu = $this->getMenu();
 
-        $navigation = view(env('THEME').'.admin.navigation')->with('menu', $menu)->render();
+        $navigation = view(config('settings.theme').'.admin.navigation')->with('menu', $menu)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
 
         if($this->content) {
             $this->vars = array_add($this->vars, 'content', $this->content);
         }
 
-        $footer = view(env('THEME').'.admin.footer')->render();
+        $footer = view(config('settings.theme').'.admin.footer')->render();
         $this->vars = array_add($this->vars, 'footer', $footer);
 
         return view($this->template)->with($this->vars);

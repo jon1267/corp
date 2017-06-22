@@ -14,7 +14,7 @@ class PortfolioController extends SiteController
 
         $this->p_rep = $p_rep;
 
-        $this->template = env('THEME').'.portfolios';
+        $this->template = config('settings.theme').'.portfolios';
     }
 
     public function index()
@@ -28,7 +28,8 @@ class PortfolioController extends SiteController
         $portfolios = $this->getPortfolios();
         //dd($portfolios);
 
-        $content = view(env('THEME').'.portfolios_content')->with('portfolios', $portfolios)->render();
+        // вместо config('settings.theme') можно env('THEME') да оно так т было
+        $content = view(config('settings.theme').'.portfolios_content')->with('portfolios', $portfolios)->render();
         $this->vars = array_add($this->vars,'content', $content);
 
         return $this->renderOutput();
@@ -46,13 +47,15 @@ class PortfolioController extends SiteController
     public function show($alias) {
 
         $portfolio = $this->p_rep->one($alias);
+        // вместо config('settings.theme') можно env('THEME') да оно так т было
         $portfolios = $this->getPortfolios(config('settings.other_portfolios'), false);
 
         $this->title = $portfolio->title;
         $this->keywords = $portfolio->keywords;
         $this->meta_desc = $portfolio->meta_desc;
 
-        $content = view(env('THEME').'.portfolio_content')->with(['portfolio' => $portfolio, 'portfolios' => $portfolios ])->render();
+        // вместо config('settings.theme') можно env('THEME') да оно так т было
+        $content = view(config('settings.theme').'.portfolio_content')->with(['portfolio' => $portfolio, 'portfolios' => $portfolios ])->render();
         $this->vars = array_add($this->vars, 'content', $content);
 
         return $this->renderOutput();

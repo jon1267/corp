@@ -80,7 +80,7 @@ class CommentController extends SiteController
         $data['hash'] = md5($data['email']);
         $data['created_at'] = $comment->created_at; // доб. я дату токо вставл. коммента.
 
-        $view_comment = view(env('THEME').'.content_one_comment')->with('data', $data)->render();
+        $view_comment = view(config('settings.theme').'.content_one_comment')->with('data', $data)->render();
 
         return Response::json(['success' => true, 'comment' => $view_comment, 'data' => $data]);
         // echo json_encode(['hello'=> 'Hello world']);

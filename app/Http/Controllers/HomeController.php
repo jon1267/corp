@@ -26,6 +26,6 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         return view('home')->with('user',$user);
-        //return view(env('THEME').'.login');
+        //return view(config('settings.theme').'.login');
     }
 }

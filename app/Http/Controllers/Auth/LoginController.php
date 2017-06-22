@@ -43,7 +43,7 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
 
         // строку ниже тоже добавил я...
-        ////$this->loginView = env('THEME').'.login';
+        ////$this->loginView = config('settings.theme').'.login';
     }
 
 /*    public function showLoginForm() {
@@ -54,6 +54,6 @@ class LoginController extends Controller
             return view($view)->with('title', 'Вход на сайт');
         }
         abort(404);
-        //return view(env('THEME').'.login');
+        //return view(config('settings.theme').'.login');
     }*/
 }

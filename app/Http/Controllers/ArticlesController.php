@@ -20,7 +20,7 @@ class ArticlesController extends SiteController
         $this->c_rep = $c_rep;
 
         $this->bar = 'right';
-        $this->template = env('THEME').'.articles';
+        $this->template = config('settings.theme').'.articles';
     }
 
     public function index($cat_alias = false)
@@ -33,13 +33,13 @@ class ArticlesController extends SiteController
 
         $articles = $this->getArticles($cat_alias);
 
-        $content = view(env('THEME').'.articles_content')->with('articles', $articles)->render();
+        $content = view(config('settings.theme').'.articles_content')->with('articles', $articles)->render();
         $this->vars = array_add($this->vars,'content', $content);
 
         $comments = $this->getComments(config('settings.recent_comments'));
         $portfolios = $this->getPortfolios(config('settings.recent_portfolios'));
 
-        $this->contentRightBar = view(env('THEME').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios]);
+        $this->contentRightBar = view(config('settings.theme').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios]);
 
         return $this->renderOutput();
     }
@@ -94,13 +94,13 @@ class ArticlesController extends SiteController
             $this->meta_desc = $article->meta_desc;
         }
 
-        $content = view(env('THEME').'.article_content')->with('article', $article)->render();
+        $content = view(config('settings.theme').'.article_content')->with('article', $article)->render();
         $this->vars = array_add($this->vars, 'content', $content);
 
         $comments = $this->getComments(config('settings.recent_comments'));
         $portfolios = $this->getPortfolios(config('settings.recent_portfolios'));
 
-        $this->contentRightBar = view(env('THEME').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios]);
+        $this->contentRightBar = view(config('settings.theme').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios]);
 
         return $this->renderOutput();
     }

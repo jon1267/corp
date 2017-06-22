@@ -22,14 +22,14 @@ class IndexController extends AdminController
             abort(403);
         }
 
-        $this->template = env('THEME').'.admin.index';
+        $this->template = config('settings.theme').'.admin.index';
     }
 
     public function index() {
 
         //$this->user = Auth::user(); //тут работает
 
-        //$this->template = env('THEME').'.admin.index';
+        //$this->template = config('settings.theme').'.admin.index';
 
         $this->title = 'Панель администратора  ';
         return $this->renderOutput();

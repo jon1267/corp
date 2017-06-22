@@ -9,7 +9,7 @@
                     <th>Удалить</th>
                 </thead>
                 @if($menus)
-                    @include(env('THEME').'.admin.custom-menu-items',
+                    @include(config('settings.theme').'.admin.custom-menu-items',
                     ['items' => $menus->roots(), 'paddingLeft' => ''])
                 @endif
             </table>
