@@ -105,6 +105,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'edit' => 'admin.menus.edit',
     ]]);
 
+    // -----------------------------------------------------------
+    // Route::resource('/articles', 'Admin\ArticlesController');
+    // делаю сам, этого в курсе небыло...по аналогии с articles
+    Route::resource('/portfolios', 'Admin\PortfoliosController', ['names' => [
+        'index'   => 'admin.portfolios.index',
+        'create'  => 'admin.portfolios.create',
+        'store'   => 'admin.portfolios.store',
+        'update'  => 'admin.portfolios.update',
+        'destroy' => 'admin.portfolios.destroy',
+        'show' => 'admin.portfolios.show',
+        'edit' => 'admin.portfolios.edit',
+    ]]);
+    // -----------------------------------------------------------
 
 });
 
