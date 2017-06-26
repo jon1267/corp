@@ -36,7 +36,9 @@ class PortfoliosController extends AdminController
         //
         $this->title = 'Меннеджер портфолио';
         $portfolios = $this->getPortfolios();
-        dd($portfolios);
+
+        $this->content = view(config('settings.theme').'.admin.portfolios_content')
+            ->with('portfolios', $portfolios)->render();
 
         return $this->renderOutput();
     }
