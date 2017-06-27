@@ -12,7 +12,8 @@
                         <th>Изображение</th>
                         <th>Заказчик</th>
                         <th>Псевдоним</th>
-                        <th>Дествие</th>
+                        <th>Фильтр</th>
+                        <th>Действие</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,7 @@
                             </td>
                             <td>{{$portfolio->customer}}</td>
                             <td>{{$portfolio->alias}}</td>
+                            <td>{{$portfolio->filter_alias}}</td>
                             <td>
                                 {!! Form::open(['url' => route('admin.portfolios.destroy',['portfolios'=>$portfolio->alias]),'class'=>'form-horizontal','method'=>'POST']) !!}
                                 {{ method_field('DELETE') }}
