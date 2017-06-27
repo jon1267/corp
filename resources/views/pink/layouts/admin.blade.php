@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('settings.theme')) }}/css/buttons.css" /> <!-- MAIN THEME STYLESHEET -->
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('settings.theme')) }}/css/cache-custom.css" /> <!-- MAIN THEME STYLESHEET -->
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('settings.theme')) }}/css/jquery-ui.css" /> <!-- jquery-ui for accordeon -->
-    <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('settings.theme')) }}/jon-style.css" /> <!-- Jon STYLESHEET for portfolio -->
+        <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('settings.theme')) }}/jon-style.css" /> <!-- Jon STYLESHEET for portfolio -->
         
 		
 		

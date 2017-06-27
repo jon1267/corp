@@ -55,18 +55,24 @@ class PortfoliosController extends AdminController
      */
     public function create()
     {
-        //
         //if(Gate::denies('save', new Portfolio() )) {
             //abort(403, 'Нет прав на добавление портфолио');
 
-             // тут срабатывает abort(). Чтоб реально проверить право на добавл. portfolio нада:
-             // создать политику (php artisan make:policy PortfolioPolicy). В политике
-             // \app\Policies\PortfolioPolicy.php создать publ func save(User $user)
-             // {return $user->canDo('ADD_PORTFOLIO');} Далее эту политику зарегистрир. в
-             // \app\Providers\AuthServiceProvider.php - в массив protected $policies = []
-             // добавить чтото типа [...,Portfolio::class => PortfolioPolicy::class,...]
-             // См образец видео №32 ~3:00 мин  Я для скрости опускаю...)
+            // тут срабатывает abort(). Чтоб реально проверить право на добавл. portfolio нада:
+            // создать политику (php artisan make:policy PortfolioPolicy). В политике
+            // \app\Policies\PortfolioPolicy.php создать public function save(User $user)
+            // {return $user->canDo('ADD_PORTFOLIO');} Далее эту политику зарегистрир. в
+            // \app\Providers\AuthServiceProvider.php - в массив protected $policies = []
+            // добавить чтото типа [...,Portfolio::class => PortfolioPolicy::class,...]
+            // Еще в тбл permissions добавить name = 'ADD_PORTFOLIO' а где ADD там и UPD..,DEL...
+            // См образец видео №32 ~3:00 мин  Я для скрости опускаю...)
         //}
+
+        $this->title = 'Добавить новое портфолио';
+
+        $this->content = view(config('settings.theme').'.admin.portfolios_create_content')->render();
+
+        return $this->renderOutput();
     }
 
     /**
