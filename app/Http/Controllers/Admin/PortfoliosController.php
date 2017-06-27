@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
 
 use Corp\Repositories\PortfoliosRepository;
-
+use Corp\Filter;
 use Corp\Portfolio;
 use Gate;
 
@@ -70,7 +70,15 @@ class PortfoliosController extends AdminController
 
         $this->title = 'Добавить новое портфолио';
 
-        $this->content = view(config('settings.theme').'.admin.portfolios_create_content')->render();
+        $filters = Filter::select(['id', 'title', 'alias'])->get();
+        //dd($filters);
+        $lists =[];
+        foreach ($filters as $filter) {
+            $lists[$filter->id] = $filter->title;
+        }
+        //dd($lists);
+
+        $this->content = view(config('settings.theme').'.admin.portfolios_create_content')->with('filters',$lists)->render();
 
         return $this->renderOutput();
     }

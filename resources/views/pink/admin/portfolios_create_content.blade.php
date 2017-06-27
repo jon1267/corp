@@ -94,16 +94,16 @@
 
             </li>
 
-            {{--<li class="text-field">
+            <li class="text-field">
                 <label for="name-contact-us">
-                    <span class="label">Категория:</span>
+                    <span class="label">Фильтр:</span>
                     <br />
-                    <span class="sublabel">Категория материала</span><br />
+                    <span class="sublabel">Категория портфолио</span><br />
                 </label>
                 <div class="input-prepend">
-                    {!! Form::select('category_id', $categories,isset($article->category_id) ? $article->category_id  : '') !!}
+                    {!! Form::select('filter_alias', $filters) !!}
                 </div>
-            </li>--}}
+            </li>
 
             @if(isset($portfolio->id))
                 <input type="hidden" name="_method" value="PUT">
