@@ -13,8 +13,19 @@ class PortfolioRequest extends FormRequest
      */
     public function authorize()
     {
-        //return false;
-        return true;
+        //return false; //return true;
+        //return \Auth::user()->canDo('ADD_PORTFOLIOS');
+        return \Auth::user()->canDo('ADD_ARTICLES');
+    }
+
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+
+        $validator->sometimes('alias', 'unique:portfolios|max:255', function($input) {
+            return !empty($input->alias);
+        });
+        return $validator;
     }
 
     /**

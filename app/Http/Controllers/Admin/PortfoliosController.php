@@ -92,8 +92,12 @@ class PortfoliosController extends AdminController
      */
     public function store(PortfolioRequest $request)
     {
-        //
-        dd($request);
+        //dd($request);
+        $result = $this->p_rep->addPortfolio($request);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 
     /**
