@@ -3,6 +3,7 @@
 namespace Corp\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Corp\Http\Requests\PortfolioRequest;
 use Corp\Http\Controllers\Controller;
 
 use Corp\Repositories\PortfoliosRepository;
@@ -89,9 +90,10 @@ class PortfoliosController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PortfolioRequest $request)
     {
         //
+        dd($request);
     }
 
     /**
