@@ -4,6 +4,8 @@ namespace Corp\Repositories;
 
 use Corp\Portfolio;
 use Gate;
+use Image;
+use Config;
 
 class PortfoliosRepository extends Repository
 {
@@ -40,6 +42,40 @@ class PortfoliosRepository extends Repository
             $request->flash();//сохранить $request в сессии
 
             return ['error' => 'Данный псевдоним уже используется'];
+        }
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            if($image->isValid()) {
+                $str = str_random(8);
+                //формируем обычный php объект через ф-цию php stdClass();
+                $obj = new \stdClass();
+                $obj->mini = $str.'_mini.jpg';
+                $obj->max = $str.'_max.jpg';
+                $obj->path = $str.'.jpg';
+
+                $img = Image::make($image);
+                //dd($img);
+                $img->fit(Config::get('settings.image')['width'],
+                    Config::get('settings.image')['height'])
+                    ->save(public_path().'/'.config('settings.theme').'/images/projects/'.$obj->path);
+
+                $img->fit(Config::get('settings.portfolios_img')['max']['width'],
+                    Config::get('settings.portfolios_img')['max']['height'])
+                    ->save(public_path().'/'.config('settings.theme').'/images/projects/'.$obj->max);
+
+                $img->fit(Config::get('settings.portfolios_img')['mini']['width'],
+                    Config::get('settings.portfolios_img')['mini']['height'])
+                    ->save(public_path().'/'.config('settings.theme').'/images/projects/'.$obj->mini);
+                //dd('hello');//смотрим, чтоб в папке /images/projects/ появились ...mini.jpg ..._max.jpg
+                //формируем строку типа {"mini":"..._mini.jpg","max":"..._max.jpg","path":"...jpg"}
+                $data['img'] = json_encode($obj);
+                dd($data);
+                $this->model->fill($data);
+
+                if($this->model->save([])) {
+                    return ['status' => 'Портфолио добавлено'];
+                }
+            }
         }
     }
 

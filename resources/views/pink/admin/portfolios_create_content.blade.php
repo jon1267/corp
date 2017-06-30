@@ -11,7 +11,7 @@
                     <span class="sublabel">Заголовок материала</span><br />
                 </label>
                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-                    {!! Form::text('title',isset($portfolio->title) ? $portfolio->title  : old('title'), ['placeholder'=>'Введите название страницы']) !!}
+                    {!! Form::text('title',isset($portfolio->title) ? $portfolio->title  : old('title'), ['placeholder'=>'Введите название портфолио']) !!}
                 </div>
             </li>
 
@@ -22,7 +22,7 @@
                     <span class="sublabel">Заголовок материала</span><br />
                 </label>
                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-                    {!! Form::text('keywords', isset($portfolio->keywords) ? $portfolio->keywords  : old('keywords'), ['placeholder'=>'Введите название страницы']) !!}
+                    {!! Form::text('keywords', isset($portfolio->keywords) ? $portfolio->keywords  : old('keywords'), ['placeholder'=>'Введите заголовок портфолио']) !!}
                 </div>
             </li>
 
@@ -30,10 +30,10 @@
                 <label for="name-contact-us">
                     <span class="label">Мета описание:</span>
                     <br />
-                    <span class="sublabel">Заголовок материала</span><br />
+                    <span class="sublabel">Метаописание портфолио</span><br />
                 </label>
                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-                    {!! Form::text('meta_desc', isset($portfolio->meta_desc) ? $portfolio->meta_desc  : old('meta_desc'), ['placeholder'=>'Введите название страницы']) !!}
+                    {!! Form::text('meta_desc', isset($portfolio->meta_desc) ? $portfolio->meta_desc  : old('meta_desc'), ['placeholder'=>'Введите метаописание портфолио']) !!}
                 </div>
             </li>
 
@@ -44,7 +44,29 @@
                     <span class="sublabel">введите псевдоним</span><br />
                 </label>
                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-                    {!! Form::text('alias', isset($portfolio->alias) ? $portfolio->alias  : old('alias'), ['placeholder'=>'Введите псевдоним страницы']) !!}
+                    {!! Form::text('alias', isset($portfolio->alias) ? $portfolio->alias  : old('alias'), ['placeholder'=>'Введите псевдоним портфолио']) !!}
+                </div>
+            </li>
+
+            <li class="text-field">
+                <label for="name-contact-us">
+                    <span class="label">Заказчик:</span>
+                    <br />
+                    <span class="sublabel">заказчик портфолио</span><br />
+                </label>
+                <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
+                    {!! Form::text('customer', isset($portfolio->customer) ? $portfolio->customer  : old('customer'), ['placeholder'=>'Введите название заказчика']) !!}
+                </div>
+            </li>
+
+            <li class="text-field">
+                <label for="name-contact-us">
+                    <span class="label">Фильтр:</span>
+                    <br />
+                    <span class="sublabel">Категория портфолио</span><br />
+                </label>
+                <div class="input-prepend">
+                    {!! Form::select('filter_alias', $filters) !!}
                 </div>
             </li>
 
@@ -94,16 +116,6 @@
 
             </li>
 
-            <li class="text-field">
-                <label for="name-contact-us">
-                    <span class="label">Фильтр:</span>
-                    <br />
-                    <span class="sublabel">Категория портфолио</span><br />
-                </label>
-                <div class="input-prepend">
-                    {!! Form::select('filter_alias', $filters) !!}
-                </div>
-            </li>
 
             @if(isset($portfolio->id))
                 <input type="hidden" name="_method" value="PUT">
