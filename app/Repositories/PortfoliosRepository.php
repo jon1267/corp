@@ -32,7 +32,15 @@ class PortfoliosRepository extends Repository
         if(empty($data['alias'])) {
             $data['alias'] = $this->transliterate($data['title']);
         }
-        dd($data);
+        //dd($data);
+        if($this->one($data['alias'], false)) {
+            // merge() добавит в объект $request массив []
+            $request->merge(['alias' => $data['alias']]);
+            //dd($request);
+            $request->flash();//сохранить $request в сессии
+
+            return ['error' => 'Данный псевдоним уже используется'];
+        }
     }
 
 
