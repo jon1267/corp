@@ -119,9 +119,34 @@ class PortfoliosController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    //public function edit($id)
+    //public function edit(Portfolio $portfolio)
+    public function edit($alias)
+
     {
-        //
+        $portfolio = Portfolio::where('alias', $alias)->first();
+        //dd($portfolio);
+        /*if(!Gate::denies('edit', new Portfolio())) {
+            abort(403, 'Нет прав добавлять статьи и портф.');
+        }*/
+        $portfolio->img = json_decode($portfolio->img);
+
+        $filters = Filter::select(['id', 'title', 'alias'])->get();
+        //dd($filters);
+        $lists =[];
+        foreach ($filters as $filter) {
+            // вот же жворняжка! так не работает, 2стр. а ниже OK !!!
+            //$lists[$filter->id] = $filter->title;
+            $lists[$filter->alias] = $filter->title;
+        }
+        //dd($lists);
+        $this->title = 'Редактируем портфолио - '.$portfolio->title;
+
+        $this->content = view(config('settings.theme').'.admin.portfolios_create_content')
+            ->with(['filters' => $lists, 'portfolio' => $portfolio])
+            ->render();
+
+        return $this->renderOutput();
     }
 
     /**

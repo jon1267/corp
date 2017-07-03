@@ -25,9 +25,14 @@ class RouteServiceProvider extends ServiceProvider
     {
         //
         parent::boot();
-        // чето не работает...чють переделываю см ArticlesController стр 110
+        // чето не работает...чyть переделываю см ArticlesController стр 110
         /*Route::bind('articles', function($value) {
             return Article::where('alias',$value)->first();
+        });*/
+
+        // и так не работает...в PortfolioController edit(Portfolio $portfolio)
+        /*Route::bind('portfolios', function ($value) {
+            return \Corp\Portfolio::where('alias', $value)->first();
         });*/
 
         // ...!!! это работает !!! код выше нет...(разница есть)

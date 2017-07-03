@@ -97,8 +97,8 @@
                         <span class="label">Изображения материала:</span>
                     </label>
 
-                    {{ Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
-                    {!! Form::hidden('old_image',$article->img->path) !!}
+                    {{ Html::image(asset(config('settings.theme')).'/images/projects/'.$portfolio->img->path,'',['style'=>'width:400px']) }}
+                    {!! Form::hidden('old_image',$portfolio->img->path) !!}
 
                 </li>
             @endif
