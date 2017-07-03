@@ -75,7 +75,9 @@ class PortfoliosController extends AdminController
         //dd($filters);
         $lists =[];
         foreach ($filters as $filter) {
-            $lists[$filter->id] = $filter->title;
+            // вот же жворняжка! так не работает, 2стр. а ниже OK !!!
+            //$lists[$filter->id] = $filter->title;
+            $lists[$filter->alias] = $filter->title;
         }
         //dd($lists);
 

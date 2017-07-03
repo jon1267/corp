@@ -69,10 +69,13 @@ class PortfoliosRepository extends Repository
                 //dd('hello');//смотрим, чтоб в папке /images/projects/ появились ...mini.jpg ..._max.jpg
                 //формируем строку типа {"mini":"..._mini.jpg","max":"..._max.jpg","path":"...jpg"}
                 $data['img'] = json_encode($obj);
-                dd($data);
-                $this->model->fill($data);
+                //dd($data);
 
-                if($this->model->save([])) {
+                //$this->model->fill($data);
+                //dd($this->model);
+
+                //$request->portfolio()->save($this->model)
+                if($this->model->fill($data)->save()) {
                     return ['status' => 'Портфолио добавлено'];
                 }
             }

@@ -9,7 +9,7 @@ class Portfolio extends Model
     //
     protected $fillable = [
         'title','text','customer','alias','img',
-        'filter_alias', 'keywords', 'meta_desc'
+        'filter_alias','keywords', 'meta_desc'
     ];
 
     public function filter(){
