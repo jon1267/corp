@@ -156,9 +156,19 @@ class PortfoliosController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    //public function update(Request $request, $id)
+    public function update(PortfolioRequest $request, $alias)
     {
-        //
+        // не нормально отрабатывает при обновл. поля алиас...если его не трогать - ОК.
+        // ну оно и понятно - по алиасу отыскивается статья, потому он вместо парам алиас
+        // сделал Article $article
+        $portfolio = Portfolio::where('alias', $alias)->first();
+
+        $result = $this->p_rep->updatePortfolio($request, $portfolio);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 
     /**
