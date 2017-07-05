@@ -66,6 +66,7 @@
                     <span class="sublabel">Категория портфолио</span><br />
                 </label>
                 <div class="input-prepend">
+                    {{--тут менять ... не то значение в селекте--}}
                     {!! Form::select('filter_alias', $filters) !!}
                 </div>
             </li>

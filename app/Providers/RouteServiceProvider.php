@@ -31,9 +31,9 @@ class RouteServiceProvider extends ServiceProvider
         });*/
 
         // и так не работает...в PortfolioController edit(Portfolio $portfolio)
-        /*Route::bind('portfolios', function ($value) {
+        Route::bind('portfolios', function ($value) {
             return \Corp\Portfolio::where('alias', $value)->first();
-        });*/
+        });
 
         // ...!!! это работает !!! код выше нет...(разница есть)
         Route::bind('menus', function ($value) {

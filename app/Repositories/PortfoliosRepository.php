@@ -96,7 +96,7 @@ class PortfoliosRepository extends Repository
         }
 
         $result = $this->one($data['alias'], false);
-        dd($data, $result); // ??? $result == null
+        //dd($data, $result); // ??? $result == null
 
         if($result['id'] != $portfolio->id) {
             // merge() добавит в объект $request массив []

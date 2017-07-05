@@ -23,16 +23,14 @@ class PortfolioRequest extends FormRequest
         $validator = parent::getValidatorInstance();
 
         $validator->sometimes('alias', 'unique:portfolios|max:255', function($input) {
-
-            if($this->route()->hasParameter('portfolios')) {
-
-                // этот код не работает, при сохранении если псевдоним не менять нет валидации...
-                // а все потому, что в public function update(..., $alias) должно быть не $alias
-                // а модель (..., Portfolio $portfolio) но тогда были др. глюки. ...разбираться:)
-                $model = $this->route()->parameter('portfolios');
-
-                // ??? $model->alias
-                return ($model != $input->alias) && !empty($input->alias);
+            //dd($this->route()->hasParameter('portfolio'));
+            if($this->route()->hasParameter('portfolio')) {
+                 /*этот код не работает, при сохранении, если поменять псевдоним  нет валидации...
+                 а все потому, что в public function update(..., $alias) должно быть не $alias
+                 а модель (..., Portfolio $portfolio) но тогда были др. глюки. ...разбираться:)*/
+                $model = $this->route()->parameter('portfolio');
+                //dd($model); //$model == 'masha-bears' те alias !!!
+                return ($model !== $input->alias) && !empty($input->alias);
             }
             return !empty($input->alias);
         });
